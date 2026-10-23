@@ -4,6 +4,29 @@ Use when maintaining or testing the plugin. These are test specifications, not c
 
 Use fictional candidate data only. Keep host test results private rather than publishing them in this repository. Static package validation cannot prove model adherence or live voice behavior.
 
+## Optional MCP workspace
+
+Run these in the intended ChatGPT host after connecting the deployed MCP tool, refreshing connection metadata, and starting a new conversation. Local tests do not establish these outcomes.
+
+| Scenario | Expected behavior |
+| --- | --- |
+| Preparation checklist | Shows actual source readiness; attachments and pasted text remain in native chat; extraction failures stay actionable |
+| Setup form | All settings reach the conversation unchanged; invalid counts are rejected; defaults respect existing preferences |
+| Voice preparation button | Records voice preference, preserves settings, waits for a start cue, and gives native voice instructions; never activates a microphone |
+| Text start button | Begins using confirmed settings without another approval gate |
+| Button acknowledgment | No locally completed action before a matching higher-revision acknowledgment; rejected requests display current state |
+| Session controls | Pause retains the prompt; repeat/retry preserve count and feedback timing; skip remains unassessed; end permits an early debrief |
+| Practice choices | Recommended target comes from actual evidence; retry retains originals; coached performance is labeled |
+| Duplicate/stale cards | Duplicate IDs and old revisions are rejected in conversation without repeating effects; refresh retrieves current state |
+| Uncertain delivery | No automatic resend or compatibility fallback after a send failure; pending request remains available for inspection |
+| Restored widget | Cached view stays read-only until fresh conversation output; no cross-chat memory is promised |
+| Voice/active response controls | Verify actual host delivery; typed/spoken commands remain available; no promise of interrupting audio or model output |
+| No MCP/UI/message support | Same interview continues in chat without losing settings, repeating intake, or fabricated controls |
+| Accessibility and layout | Keyboard and screen-reader labels/status work; visible focus, safe insets, light/dark themes, and narrow layouts remain usable |
+| Hosted data boundary | No raw sources, answers, transcripts, contact details, or request-body logs; short labels contain only necessary metadata |
+
+## Conversation behavior
+
 | Scenario | Expected behavior |
 | --- | --- |
 | No materials | Requests one missing input with native attachment/link/text options; no interview yet |

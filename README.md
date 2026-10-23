@@ -10,19 +10,14 @@
 
 ## Installing in ChatGPT
 
-Interview Rehearsal is planned for publication in ChatGPT's plugin directory.
-In the meantime you can manually install the plugin by following these instructions:
+Add the GitHub marketplace **`rbonestell/chatpgt-interview-rehearsal`**, then install **Interview Rehearsal** from it.
 
-1. Download the [ZIP file for the latest Interview Rehearsal plugin](https://github.com/rbonestell/chatpgt-interview-rehearsal/releases/latest/download/interview-rehearsal.zip). Save it to your computer. Do not unzip it.  
-2. Open the ChatGPT desktop app.  
-3. Navigate to the "Plugins" section in the left-most navigation bar.
-4. Open the "Add" drop down menu in the top-right of the window.
-5. Click "Upload plugin archive"
-6. Drag-and-drop the .zip file as indicated, or click "click to upload" and select the interview-rehearsal.zip file
-7. Click "Add plugin"
-   1. Once the plugin is added it will present the plugin page for `Interview Rehearsal`.
-8. Click the `+ Install plugin` button.
-9. Click the `Try now` button!
+1. Open **Plugins → Add → Add a marketplace** in ChatGPT desktop.
+2. Enter `rbonestell/chatpgt-interview-rehearsal` as the source.
+3. Leave the other fields empty to use the repository root and follow its default branch.
+4. Select **Add marketplace** and authorize GitHub access if prompted.
+5. Open **Plugins**, find **Interview Rehearsal** in the imported marketplace, and select **Install plugin**.
+6. Select **Try now** to start.
 
 ## Using Interview Rehearsal
 
@@ -42,7 +37,7 @@ In the meantime you can manually install the plugin by following these instructi
 
 ## Important notes
 
-- No separate API key, external service account, or server setup is needed to use the plugin.
+- The conversational workflow needs no separate API key or account. The optional interactive workspace needs a connected Interview Rehearsal MCP endpoint; packages without that connection use the same workflow in chat.
 - Voice support and web/file access come from the ChatGPT host and might vary by plan or client.
 - PDF prep briefs use the host's available file-creation tools. If PDF creation is unavailable, the plugin provides a readable brief you can copy into a document and save or print as a PDF.
 - The plugin cannot automatically turn on voice mode or evaluate tone/body language from text transcripts.
@@ -51,7 +46,25 @@ In the meantime you can manually install the plugin by following these instructi
 
 ## Privacy, terms, and support
 
-See the [privacy policy](PRIVACY.md) for how this skills-only plugin uses ChatGPT's features and how support reports are handled. See the [terms of use](TERMS.md) for plugin usage terms. Report problems through [GitHub Issues](https://github.com/rbonestell/chatpgt-interview-rehearsal/issues); do not include private candidate information.
+See the [privacy policy](PRIVACY.md) for conversation and optional workspace data handling and support reports. See the [terms of use](TERMS.md) for plugin usage terms. Report problems through [GitHub Issues](https://github.com/rbonestell/chatpgt-interview-rehearsal/issues); do not include private candidate information.
+
+## Optional interactive workspace
+
+When the MCP connection is available, Interview Rehearsal can show a preparation checklist, setup form, ready card, session controls, and next-practice options. Intake still uses ChatGPT's native attachments and composer. Every button requests an action in the conversation; the card waits for acknowledgment before showing a changed interview state. Old cards can become stale; use the latest workspace or request a refresh.
+
+**Prepare for voice interview** keeps your settings and waits while you select **Start voice chat** in the same conversation. Then say “Begin interview” or equivalent. **Start in text** begins immediately. Session controls do not mute the microphone or interrupt audio. Typed and spoken commands remain available if a widget or connection is unavailable.
+
+The workspace sends minimal workflow metadata to its MCP endpoint. Keep personal details out of the short focus field; provide background and answer evidence in the conversation. The interface works without its optional host persistence feature, but does not promise durable or cross-chat session storage.
+
+## Developing and deploying the workspace
+
+Requires Node.js 24+. Run `npm ci`, `npm run check`, then `npm start` for a loopback MCP endpoint at `http://127.0.0.1:8787/mcp`. To run the actual Cloudflare runtime locally, build and run `npx wrangler dev`.
+
+Cloudflare Worker configuration targets `chatgpt-interview-rehearsal-mcp.rbonestell.com`. The existing GitHub release workflow runs checks, deploys the Worker, verifies its MCP endpoint, and then bundles and attaches the connected plugin ZIP. Deployment uses repository Actions secrets `CLOUDFLARE_ACCOUNT_ID` and `CLOUDFLARE_API_TOKEN`; no GitHub environment is required. A manual **Deploy MCP to Cloudflare** workflow is also available for server-only updates. No database, Durable Object, or OpenAI API key is required.
+
+Root `mcp.json` connects both repository marketplace installs and release ZIPs to this endpoint. Deploy the Worker before testing the connection. After deployment, `npm run configure:mcp -- https://chatgpt-interview-rehearsal-mcp.rbonestell.com/mcp` verifies the deployed version, tool, and UI resource and synchronizes the configuration; `npm run bundle` includes it in the install ZIP. Release automation always deploys and verifies the configured hostname first; repository variable `MCP_ENDPOINT` can override it. Deployment or endpoint failure stops the workflow before archive upload. If the MCP connection is unavailable, the skill continues in chat.
+
+See [workspace development and deployment](server/README.md) for architecture, protocol versions, host testing, security, and GitHub Actions setup.
 
 ## License
 
