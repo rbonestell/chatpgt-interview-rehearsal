@@ -32,9 +32,9 @@ Availability may vary by ChatGPT account, client, and workspace settings.
 - Your resume and job description are supplied to your own ChatGPT conversation. Avoid uploading anything confidential that you are not authorized to share.
 - This plugin simulates interviews; it has no affiliation with any employer and does not predict hiring decisions.
 
-## Privacy and support
+## Privacy, terms, and support
 
-See the [privacy policy](PRIVACY.md) for how this skills-only plugin uses ChatGPT's features and how support reports are handled. Report problems through [GitHub Issues](https://github.com/rbonestell/chatpgt-interview-rehearsal/issues); do not include private candidate information.
+See the [privacy policy](PRIVACY.md) for how this skills-only plugin uses ChatGPT's features and how support reports are handled. See the [terms of use](TERMS.md) for plugin usage terms. Report problems through [GitHub Issues](https://github.com/rbonestell/chatpgt-interview-rehearsal/issues); do not include private candidate information.
 
 ## License
 
