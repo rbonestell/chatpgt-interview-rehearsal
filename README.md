@@ -1,6 +1,6 @@
 # Interview Rehearsal plugin for ChatGPT
 
-Voice-first, role-specific mock interview practice for ChatGPT.
+Voice-first, role-specific mock interview practice for ChatGPT. Published by Bobby Bonestell.
 
 <p align="center">
   <img src="images/icon.png" alt="Interview Rehearsal icon" width="200" height="200">
