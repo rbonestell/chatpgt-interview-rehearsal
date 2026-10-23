@@ -30,6 +30,6 @@ A user who only wants a generic drill may proceed without a full resume or posti
 
 ## Optional take-away and continuity
 
-After the debrief, offer a concise preparation brief only if it would help: target role, supported strengths, three to five real story cues, gaps and honest responses, practice priorities, and questions to ask. Do not auto-create documents or ask another setup questionnaire. If a file is requested, use available file creation and saving tools and verify success before linking it.
+Use the [prep brief guidance](prep-brief.md) for the optional PDF study aid offered after the debrief. Create it only when requested or accepted, reusing the current session's verified materials and answer evidence. If subsequent practice changes the evidence, update an existing brief only on request; distinguish original, unassisted retry, and coached performance.
 
 On a request to resume later or move chats, provide a user-visible checkpoint: source coverage, role, settings, completed question identifiers, concise answer evidence, assistance status, pending question, and next exercise. Omit unnecessary personal details; do not promise durable memory or cross-chat access to attachments. A request to forget an input means stop using it; do not claim that host-stored files or logs were deleted unless an authorized deletion tool actually confirms it.

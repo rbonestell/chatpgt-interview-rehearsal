@@ -34,6 +34,12 @@ Use fictional candidate data only. Keep host test results private rather than pu
 | Changed role midway | Refreshes affected analysis and avoids mixing role standards |
 | Detailed voice debrief | Brief spoken summary, written detail where supported; no false silent-output promise |
 | Resume another chat | Provides checkpoint; does not promise attachment transfer or persistent memory |
+| Prep brief after debrief | Offers once without creating a file until accepted; reuses verified inputs and actual answer evidence |
+| PDF prep brief requested | Creates a real downloadable PDF where tools support it; verifies the file and layout where rendering is available; includes concise study cues, drills, and employer questions |
+| Prep brief artwork | Uses the packaged icon as a small first-page header accent without distortion; continues with a plain header if the asset is inaccessible |
+| Prep brief with limited evidence | Marks untested competencies and incomplete story details; invents no performance, achievements, or improvement |
+| PDF creation unavailable or failed | Explains the limit and provides the complete readable brief; never invents an attachment or download link |
+| Prep brief privacy and continuity | Omits raw resumes, full transcripts, and unnecessary identifiers; uses no third-party converter; treats a later uploaded brief as a snapshot |
 | Files and metadata | Valid JSON/YAML, synchronized manifests, contained references, preserved identity and audience |
 
 Use existing user testing where it covers the relevant scenarios. After behavior changes, run targeted checks of the affected paths; repeat broader text, voice, or role coverage when changes or unresolved issues warrant it. Report any untested surfaces explicitly when describing validation.
