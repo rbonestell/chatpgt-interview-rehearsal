@@ -10,26 +10,26 @@
 
 ## Installing in ChatGPT
 
-Interview Rehearsal is planned for publication in ChatGPT's plugin directory. In the meantime you can manually install the plugin by following these instructions:
+Interview Rehearsal is planned for publication in ChatGPT's plugin directory.
+In the meantime you can manually install the plugin by following these instructions:
 
 1. Download the [ZIP file for the latest Interview Rehearsal plugin](https://github.com/rbonestell/chatpgt-interview-rehearsal/releases/latest/download/interview-rehearsal.zip). Save it to your computer. Do not unzip it.  
 2. Open the ChatGPT desktop app.  
-3. Install Plugin Creator:  
-   1. Click Plugins in the ChatGPT sidebar.  
-   2. Search for Plugin Creator.  
-   3. Install it if it isn’t already installed.  
-4. Start a new chat and select `@Plugin Creator` by typing `@` in the message box.  
-5.  Attach the ZIP file using the \+ attachment button, then send this message:  
-   1. “Install the Interview Rehearsal plugin from the attached ZIP into my personal ChatGPT plugins. Preserve its existing functionality and instructions without modifying them.”  
-6. Complete installation by following any prompts from Plugin Creator.
+3. Navigate to the "Plugins" section in the left-most navigation bar.
+4. Open the "Add" drop down menu in the top-right of the window.
+5. Click "Upload plugin archive"
+6. Drag-and-drop the .zip file as indicated, or click "click to upload" and select the interview-rehearsal.zip file
+7. Click "Add plugin"
+   1. Once the plugin is added it will present the plugin page for `Interview Rehearsal`.
+8. Click the `+ Install plugin` button.
+9. Click the `Try now` button!
 
 ## Using Interview Rehearsal
 
-1. Start a new ChatGPT conversation..  
-2. Type  to select the installed plugin..  
-3. Tag `@Interview Rehearsal` and ask it to help you prepare: “`@Interview Rehearsal` Start a voice-first mock interview tailored to my background and a specific job opening.”  
+1. Start a new ChatGPT conversation.
+2. Type  to select the installed plugin.
+3. Tag `@Interview Rehearsal` and ask it to help you prepare: “`@Interview Rehearsal` Start a voice-first mock interview tailored to my background and a specific job opening.”
 4. Provide your resume or LinkedIn profile and the job description or posting URL.
-
 
 ## What to try
 
