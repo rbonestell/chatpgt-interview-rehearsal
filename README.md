@@ -1,10 +1,12 @@
 # Interview Rehearsal plugin for ChatGPT
 
-Voice-first, role-specific mock interview practice for ChatGPT. Published by Bobby Bonestell.
-
 <p align="center">
-  <img src="images/icon.png" alt="Interview Rehearsal icon" width="200" height="200">
+  <img src="images/social.png" alt="Interview Rehearsal icon" width="480" height="240">
+  <br />
+  Free voice-first, role-specific mock interview practice plugin for ChatGPT.
 </p>
+
+**Best experienced in the ChatGPT desktop app.** Prepare in text, switch to voice in the same conversation for a natural interview rehearsal, then return to your written feedback and practice plan.
 
 ## Installing in ChatGPT
 
@@ -12,15 +14,15 @@ Interview Rehearsal is planned for publication in ChatGPT's plugin directory. On
 
 1. Find **Interview Rehearsal** in ChatGPT's plugin directory.
 2. Follow the listing's installation steps and review any permissions requested by ChatGPT.
-3. Start a chat with the plugin selected, and say: **"Help me prepare for a realistic mock interview."**
+3. Start a chat with the plugin selected, and say: "`@Interview Rehearsal` Start a voice-first mock interview tailored to my background and a specific job opening."
 
-Availability may vary by ChatGPT account, client, and workspace settings.
+Availability may vary by ChatGPT account, plan, client, and workspace settings.
 
 ## What to try
 
 1. Provide a job description URL (or paste the job description) and a resume PDF/DOCX (or pasted work history / accessible LinkedIn profile).
 2. Confirm the role-fit analysis and select interview stage, length, difficulty, and feedback timing.
-3. At the ready prompt, start ChatGPT Voice **in the same conversation** and say "Begin interview". Text-only practice also works.
+3. At the ready prompt, transition the app's voice control to start ChatGPT Voice **in the same conversation**, then say "Begin interview". You can also continue entirely in text.
 4. Try "pause interview", "resume interview", "repeat the question", and "retry".
 5. Finish and review the written feedback. Note whether questions were role-specific, whether follow-ups were realistic, and whether the feedback was supported by your actual answers.
 
