@@ -114,6 +114,8 @@ export function actionMessage(s: Snapshot, action: Action, actionId: string): st
   if (action.type === "retry" && action.questionId && ![s.pendingQuestionId, s.practice?.questionId].includes(action.questionId)) throw new Error("Retry target is not available in this snapshot.");
   const request = action.type === "configure"
     ? `Confirm this interview setup: ${JSON.stringify(action.settings)}. Keep the role analysis and verified materials. Wait for a start cue.`
+    : action.type === "continue" && Object.values(s.sources).every(v => v === "read" || v === "limited")
+    ? "Review the role analysis and move to interview setup using the verified materials and existing preferences. Do not ask for materials again."
     : requests[action.type] + (action.type === "retry" && action.questionId ? ` Retry question ID ${action.questionId}, as shown in the practice recommendation.` : "");
   return `${request}\n\nInterview Rehearsal workspace request: ${JSON.stringify({
     schemaVersion: 1, workflowId: s.workflowId, baseRevision: s.revision, actionId, type: action.type,

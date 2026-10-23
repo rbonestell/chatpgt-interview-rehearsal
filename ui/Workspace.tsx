@@ -14,13 +14,25 @@ function Summary({ snapshot: s }: { snapshot: Snapshot }) {
   </dl>;
 }
 function Preparation({ snapshot: s, act, disabled }: { snapshot: Snapshot; act: Act; disabled: boolean }) {
+  const [helpOpen, setHelpOpen] = useState(false);
   const missing = s.sources.job !== "read" && s.sources.job !== "limited" ? "job description" : "background";
+  const ready = Object.values(s.sources).every(v => v === "read" || v === "limited");
   return <section aria-labelledby="prep-title"><h2 id="prep-title">Prepare for your interview</h2>
     <ul className="checklist"><li><span>Job description</span><strong>{sourceLabels[s.sources.job]}</strong></li>
       <li><span>Professional background</span><strong>{sourceLabels[s.sources.background]}</strong></li></ul>
     <p>Use the chat’s attachment control or paste a link or readable text in the composer. Redact contact details and confidential information.</p>
     {s.limitedInput && <p>Limited-input practice: questions use only the material you agreed to provide.</p>}
-    <button disabled={disabled} onClick={() => act({ type: "continue" })}>{Object.values(s.sources).every(v => v === "read" || v === "limited") ? "Review role and setup" : `Help me add my ${missing}`}</button>
+    {ready ? <button disabled={disabled} onClick={() => act({ type: "continue" })}>Review role and setup</button>
+      : <><button aria-expanded={helpOpen} aria-controls="intake-help" onClick={() => setHelpOpen(open => !open)}>Help me add my {missing}</button>
+        {helpOpen && <section id="intake-help" aria-label={`Add ${missing}`} className="handoff">
+          <p><strong>Next step: add your {missing} in the chat.</strong></p>
+          <ol>
+            <li>{missing === "job description" ? "Paste the job posting URL or full job description into the message composer below this card." : "Paste your professional background or an accessible LinkedIn profile URL into the message composer below this card."}</li>
+            <li>Or use the chat’s attachment control to attach a {missing === "job description" ? "job description" : "resume"} PDF or Word document.</li>
+            <li>Send the message. The checklist updates after the material has been read.</li>
+          </ol>
+        </section>}
+      </>}
   </section>;
 }
 function Setup({ snapshot: s, act, disabled }: { snapshot: Snapshot; act: Act; disabled: boolean }) {

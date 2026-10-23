@@ -11,6 +11,7 @@ Run these in the intended ChatGPT host after connecting the deployed MCP tool, r
 | Scenario | Expected behavior |
 | --- | --- |
 | Preparation checklist | Shows actual source readiness; attachments and pasted text remain in native chat; extraction failures stay actionable |
+| Intake-help button | Reveals specific composer/attachment instructions immediately without sending a message, redrawing the card, or marking sources read; remains useful without host messaging |
 | Setup form | All settings reach the conversation unchanged; invalid counts are rejected; defaults respect existing preferences |
 | Voice preparation button | Records voice preference, preserves settings, waits for a start cue, and gives native voice instructions; never activates a microphone |
 | Text start button | Begins using confirmed settings without another approval gate |

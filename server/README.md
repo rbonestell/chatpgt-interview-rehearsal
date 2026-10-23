@@ -2,7 +2,7 @@
 
 ## Architecture
 
-The existing skill owns interviewing, source extraction, progress, and evidence-based coaching. `show_interview_workspace` validates and echoes a versioned, minimal snapshot and associates it with `ui://interview-rehearsal/workspace-v1.html`. The tool is model-visible only. It is read-only because it renders supplied metadata without persisting state or running a job. Button effects happen in the conversation, not in this tool.
+The existing skill owns interviewing, source extraction, progress, and evidence-based coaching. `show_interview_workspace` validates and echoes a versioned, minimal snapshot and associates it with `ui://interview-rehearsal/workspace-v2.html`. The previous v1 resource URI remains readable for cached tool metadata. The tool is model-visible only. It is read-only because it renders supplied metadata without persisting state or running a job. Interview actions happen in the conversation, not in this tool. Intake help is a local disclosure of native composer/attachment instructions and does not send a conversation request.
 
 `server/workspace.ts` registers the tool/resource with the official SDK helpers. `server/http.ts` uses a fresh stateless Streamable HTTP transport per request and JSON responses. There is no SSE session, database, account, sampling/model call, audio service, or privileged server action. The same handler runs behind a loopback Node adapter and a Cloudflare Worker.
 

@@ -114,3 +114,10 @@ test("host lacking messaging preserves readable snapshot and ignores clicks", as
   assert.equal(h.messages.length, 0);
   assert.ok(h.controller.state.snapshot);
 });
+
+test("ready preparation requests setup rather than asking for already-read materials", () => {
+  const prepared = snapshot({ phase: "preparation", confirmed: false });
+  const message = actionMessage(prepared, { type: "continue" }, "review-setup");
+  assert.match(message, /move to interview setup/);
+  assert.doesNotMatch(message, /Help me supply the first missing material/);
+});

@@ -10,6 +10,8 @@ Use the host's real attachment control for PDFs and DOCX files and its message c
 
 Show a small written intake status when useful, with Job description and Background each marked Needed, Received—reading, Read, or Needs replacement. Only mark Read after actually extracting usable content. Make the next action obvious and request one missing input at a time, but accept both in one message. Avoid asking users to choose an input method before they can simply provide the material. Show the source title or filename and relevant role details after successful reading, without repeating private contact details.
 
+The workspace's intake-help button reveals instructions locally. It does not open an uploader, submit a file, or ask the model to redraw the card. The user sends materials through the chat composer or attachment control; update source readiness only after reading them. Once both sources are ready, **Review role and setup** requests the next conversational step.
+
 ### Ready-to-interview handoff
 
 Once materials are read, the user has reviewed the fit analysis, and settings are selected, show a concise ready summary: target company and role, stage, length, difficulty, feedback timing, and source readiness. Keep that summary in the current conversation for continuity. Then say: "Your interview is ready. Start voice chat in this conversation, then say ‘Begin interview.’ You can also type ‘Begin interview’ to practice in text."

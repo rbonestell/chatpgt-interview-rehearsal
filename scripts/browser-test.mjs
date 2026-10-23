@@ -64,6 +64,12 @@ try {
     acknowledgedCount = await page.evaluate(() => window.testHost.messages.length);
   };
   await ui.getByRole("button", { name: "Help me add my job description" }).waitFor();
+  // Reproduce the reported dead end: intake help must provide a visible next
+  // step without sending a no-op conversation request and redrawing the card.
+  await ui.getByRole("button", { name: "Help me add my job description" }).click();
+  await ui.getByRole("region", { name: "Add job description" }).waitFor({ timeout: 2000 });
+  assert.match(await ui.getByRole("region", { name: "Add job description" }).innerText(), /Send the message/);
+  assert.equal(await page.evaluate(() => window.testHost.messages.length), 0);
   await mkdir("temp/ui", { recursive: true });
   await page.screenshot({ path: "temp/ui/preparation.png" });
   await publish({ revision: 2, phase: "setup", sources: { job: "read", background: "read" } });
@@ -128,11 +134,16 @@ try {
   assert.equal(await ui.getByRole("button", { name: "Pause", exact: true }).isEnabled(), true);
   await page.goto(`http://127.0.0.1:${port}/?mode=no-message`);
   await ui.getByRole("button", { name: "Help me add my job description" }).waitFor();
-  assert.equal(await ui.getByRole("button", { name: "Help me add my job description" }).isDisabled(), true);
-  await page.goto(`http://127.0.0.1:${port}/?mode=compat`);
+  assert.equal(await ui.getByRole("button", { name: "Help me add my job description" }).isEnabled(), true);
   await ui.getByRole("button", { name: "Help me add my job description" }).click();
+  await ui.getByRole("region", { name: "Add job description" }).waitFor();
+  assert.equal(await page.evaluate(() => window.testHost.messages.length), 0);
+  await page.goto(`http://127.0.0.1:${port}/?mode=compat`);
+  await ui.getByRole("button", { name: "Help me add my job description" }).waitFor();
+  await publish({ phase: "ready", revision: 2, sources: { job: "read", background: "read" }, confirmed: true });
+  await ui.getByRole("button", { name: "Start in text", exact: true }).click();
   await page.waitForFunction(() => window.testHost.messages.length === 1);
-  assert.match(await page.evaluate(() => window.testHost.messages[0]), /first missing material/);
+  assert.match(await page.evaluate(() => window.testHost.messages[0]), /Begin my interview in text now/);
   assert.equal(errors.length, 0, errors.join("\n"));
   console.log("Browser bridge, five views, settings, acknowledgments, voice handoff, controls, uncertain delivery, restoration, capability fallback, CSP, and responsive themes passed. Screenshots: temp/ui/.");
 } finally {

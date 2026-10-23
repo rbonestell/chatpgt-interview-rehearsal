@@ -24,6 +24,11 @@ test("MCP client discovers model-only rendering tool, validates output, reads re
     const resource = await client.readResource({ uri: RESOURCE_URI });
     assert.equal(resource.contents[0].mimeType, "text/html;profile=mcp-app");
     assert.deepEqual((resource.contents[0]._meta?.ui as { csp: unknown }).csp, { connectDomains: [], resourceDomains: [], frameDomains: [], baseUriDomains: [] });
+    const legacy = await client.readResource({ uri: "ui://interview-rehearsal/workspace-v1.html" });
+    const legacyContent = legacy.contents[0];
+    const currentContent = resource.contents[0];
+    assert.ok("text" in legacyContent && "text" in currentContent);
+    assert.equal(legacyContent.text, currentContent.text);
   } finally { await client.close(); await server.close(); }
 });
 
