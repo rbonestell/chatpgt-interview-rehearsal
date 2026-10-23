@@ -1,0 +1,83 @@
+name: Bundle release
+
+on:
+  release:
+    # Covers stable releases and prereleases, including published drafts.
+    types: [published]
+
+permissions:
+  contents: write
+
+# Serialize releases because each successful release updates main.
+concurrency:
+  group: plugin-release
+  cancel-in-progress: false
+
+jobs:
+  bundle:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      RELEASE_TAG: ${{ github.event.release.tag_name }}
+    steps:
+      - name: Check out the release tag
+        uses: actions/checkout@v7
+        with:
+          ref: refs/tags/${{ github.event.release.tag_name }}
+          path: release-source
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: '24'
+          package-manager-cache: false
+
+      - name: Update JSON versions from the release tag
+        working-directory: release-source
+        run: |
+          version="${RELEASE_TAG#v}"
+          while IFS= read -r -d '' file; do
+            jq --arg version "$version" '.version = $version' "$file" > "$file.tmp"
+            mv "$file.tmp" "$file"
+          done < <(git ls-files -z -- '*.json')
+
+      - name: Bundle the plugin
+        working-directory: release-source
+        run: node scripts/bundle-plugin.mjs
+
+      - name: Attach the bundle to the release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        # Allow rerunning a failed workflow against the same release.
+        run: gh release upload "$RELEASE_TAG" release-source/temp/interview-rehearsal.zip --clobber
+
+      # Only reached after the bundle has been built, verified, and uploaded.
+      # A separate checkout preserves newer main changes and the release tag.
+      - name: Check out main
+        uses: actions/checkout@v7
+        with:
+          ref: main
+          path: main-source
+
+      - name: Update JSON versions on main
+        working-directory: main-source
+        run: |
+          version="${RELEASE_TAG#v}"
+          while IFS= read -r -d '' file; do
+            jq --arg version "$version" '.version = $version' "$file" > "$file.tmp"
+            mv "$file.tmp" "$file"
+          done < <(git ls-files -z -- '*.json')
+
+      - name: Commit and push version changes
+        working-directory: main-source
+        run: |
+          git add -- '*.json'
+          if git diff --cached --quiet; then
+            echo "JSON versions already match the release tag."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "Update plugin version to ${RELEASE_TAG#v}"
+          git push origin HEAD:main
