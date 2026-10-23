@@ -6,7 +6,6 @@ import { copyFile, lstat, mkdir, mkdtemp, readFile, readdir, rename, rm } from '
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { isDeepStrictEqual } from 'node:util';
-import { remoteConfig } from './configure-mcp.mjs';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
 const outputDirectory = path.join(root, 'temp');
@@ -15,7 +14,6 @@ const output = path.join(outputDirectory, 'interview-rehearsal.zip');
 const inputs = [
   'plugin.json', '.codex-plugin/plugin.json', 'skills', 'images',
   'README.md', 'LICENSE', 'PRIVACY.md', 'TERMS.md',
-  'server/README.md',
 ];
 
 function requireCondition(condition, message) {
@@ -91,18 +89,6 @@ async function bundle() {
       const relative = path.posix.normalize(listing[key]);
       requireCondition(!path.posix.isAbsolute(relative) && inventory.includes(relative),
         `Icon is missing or outside the package: ${listing[key]}`);
-    }
-    // Optional portable integrations are included rather than silently dropped.
-    try {
-      await lstat(path.join(root, 'mcp.json'));
-      const config = JSON.parse(await readFile(path.join(root, 'mcp.json'), 'utf8'));
-      const endpoint = config.mcpServers?.['interview-workspace']?.url;
-      requireCondition(endpoint && isDeepStrictEqual(config, remoteConfig(endpoint)),
-        'mcp.json must contain the verified HTTPS interview-workspace configuration without credentials.');
-      await copyInput('mcp.json', packageDirectory, inventory);
-    } catch (error) {
-      if (error.code !== 'ENOENT') throw error;
-      console.log('No production mcp.json configured: building the conversational fallback package.');
     }
     const archive = path.join(staging, 'interview-rehearsal.zip');
     run('zip', ['-q', '-X', '-r', archive, portable.name], staging);
