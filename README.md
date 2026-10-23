@@ -1,19 +1,20 @@
-# Interview Rehearsal — v1.3.0
+# Interview Rehearsal plugin for ChatGPT
 
 Voice-first, role-specific mock interview practice for ChatGPT.
 
-![Interview Rehearsal icon](images/icon.png)
-
-The plugin logo and composer icon use `images/icon.png`. Include the `images/` directory when packaging the plugin.
+<p align="center">
+  <img src="images/icon.png" alt="Interview Rehearsal icon" width="200" height="200">
+</p>
 
 ## Installing in ChatGPT
 
-1. Download and keep this ZIP intact.
-2. In ChatGPT, open **Plugin Creator** if it is available to your account. Attach the ZIP and ask: **"Install this attached Interview Rehearsal plugin for my personal use without changing the included skills."**
-3. Review and approve the installation if asked. It should appear as **Interview Rehearsal** in your plugins.
-4. Start a chat with the plugin selected, and say: **"Help me prepare for a realistic mock interview."**
+Interview Rehearsal is planned for publication in ChatGPT's plugin directory. Once published:
 
-If Plugin Creator is not available in your account, ask the sender for another supported installation method. This ZIP is not a standalone executable and opening it on your computer will not install the plugin into ChatGPT. Import availability depends on your ChatGPT account, client, and plugin settings.
+1. Find **Interview Rehearsal** in ChatGPT's plugin directory.
+2. Follow the listing's installation steps and review any permissions requested by ChatGPT.
+3. Start a chat with the plugin selected, and say: **"Help me prepare for a realistic mock interview."**
+
+Availability may vary by ChatGPT account, client, and workspace settings.
 
 ## What to try
 
@@ -25,9 +26,12 @@ If Plugin Creator is not available in your account, ask the sender for another s
 
 ## Important notes
 
-- No external API key, account, or server is needed for this skills-only package.
+- No separate API key, external service account, or server setup is needed to use the plugin.
 - Voice support and web/file access come from the ChatGPT host and might vary by plan or client.
 - The plugin cannot automatically turn on voice mode or evaluate tone/body language from text transcripts.
 - Your resume and job description are supplied to your own ChatGPT conversation. Avoid uploading anything confidential that you are not authorized to share.
 - This plugin simulates interviews; it has no affiliation with any employer and does not predict hiring decisions.
-- The included `plugin.json` contains the creator's credited author name and email address.
+
+## License
+
+See [LICENSE](LICENSE) for license terms.
