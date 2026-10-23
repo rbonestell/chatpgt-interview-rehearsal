@@ -2,10 +2,12 @@
 
 ## Project Structure & Module Organization
 
-This repository packages Interview Rehearsal, a skills-only interview coaching plugin. There is no application server or compiled source tree.
+This repository packages Interview Rehearsal, a desktop-only interview coaching plugin with a local PDF generator. There is no application server or MCP server.
 
 - `skills/mock-interview/SKILL.md`: skill metadata, operating rules, and five-phase interview workflow.
 - `skills/mock-interview/references/`: interaction guidance, interview design, feedback rubric, practice loops, and maintainer acceptance scenarios.
+- `skills/mock-interview/scripts/`: local Python PDF generator and its ReportLab requirement.
+- `tests/test_prep_brief.py`: generator checks using fictional notes.
 - `plugin.json`: root plugin manifest.
 - `.codex-plugin/plugin.json`: Codex manifest, skill discovery path, and icon references.
 - `images/icon.png`: plugin artwork.
@@ -13,12 +15,14 @@ This repository packages Interview Rehearsal, a skills-only interview coaching p
 
 ## Build, Test, and Development Commands
 
-No dependency installation, build command, development server, or automated test runner is configured. Edit Markdown and JSON directly.
+Edit Markdown and JSON directly. PDF generation requires Python 3.10+ and ReportLab in a virtual environment; see the README. There is no development server or compilation step.
 
 - `python3 -m json.tool plugin.json > /dev/null`: validate root manifest JSON.
 - `python3 -m json.tool .codex-plugin/plugin.json > /dev/null`: validate Codex manifest JSON.
 - `git diff --check`: check tracked changes for whitespace errors.
 - `git diff -- skills/ README.md plugin.json .codex-plugin/plugin.json`: review content and metadata changes.
+- `<pdf-runtime>/bin/python -m unittest discover -s tests -v`: check PDF generation and failure handling. Poppler's `pdfinfo` and `pdftotext` enable additional inspection checks.
+- `node scripts/bundle-plugin.mjs`: build and inspect the release ZIP under ignored `temp/`.
 
 For behavioral validation, load the plugin into a supported host and follow the acceptance scenarios below.
 

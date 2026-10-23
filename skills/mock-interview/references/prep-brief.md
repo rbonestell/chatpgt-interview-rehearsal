@@ -25,7 +25,7 @@ Include a short note that this is practice guidance, not a prediction of hiring 
 
 ## PDF presentation and icon
 
-Use an available PDF-generation skill or host file tool; follow its creation and verification requirements. No particular package or runtime is required by this plugin.
+Use the bundled [local PDF generator](../scripts/generate_prep_brief.py). It requires Python 3.10+ and the dependency in [requirements.txt](../scripts/requirements.txt). The plugin declares desktop execution and has no MCP server. Run locally using the host's available execution tool. Do not replace this implementation with a remote converter. If a host PDF skill is available, follow its verification requirements as well.
 
 - Title the document **Interview Prep Brief**, followed by the target role and company when known. Use a clean first-page header, comfortable margins, a clear heading hierarchy, and approximately 10.5-12 pt body text.
 - Use the packaged [Interview Rehearsal icon](../../../images/icon.png) as a small, approximately 36-48 pt square accent in the first-page header, aligned beside the title or at the upper right. Preserve its aspect ratio and leave space around it. Reuse the actual PNG; do not recreate it, fetch replacement artwork, or add a large cover page solely for branding.
@@ -35,10 +35,46 @@ Use an available PDF-generation skill or host file tool; follow its creation and
 
 ## Create, verify, and deliver
 
-1. Check whether the current host can create and return a PDF. Use supported tools and reuse an already selected output location. Otherwise choose a generic filename such as `interview-prep-brief.pdf`; avoid personal identifiers in filenames and do not overwrite an existing file without authorization.
-2. Build the content from the current evidence and create a real PDF with the available tools. Do not rename Markdown or HTML to `.pdf` or claim an export succeeded before the tool succeeds.
+1. Check whether the current host can execute the bundled Python script locally. Resolve the actual installed skill path; do not assume the working directory is the plugin root or that `${PLUGIN_ROOT}` expands inside arbitrary shell commands. Use an existing Python environment containing ReportLab. If the dependency is missing, explain the setup in the README and offer readable text; do not silently install packages or modify the system Python environment.
+2. Build the JSON described below from the current evidence. Use a local tool's structured file-writing API or pass JSON through stdin; never interpolate candidate text into executable shell code. Use an explicitly requested output location or the host's current writable artifact folder with a generic filename such as `interview-prep-brief.pdf`. The parent folder must exist. Do not write into the installed plugin or hard-code a user's Downloads path. The generator refuses to overwrite files; select a new filename on conflict. Run it with the chosen Python executable and `--input` and `--output` paths. It reads only the supplied notes and packaged artwork/fonts and writes the PDF locally. It does not fetch sources, validate the truth of notes, or create its own interview assessment. If a temporary JSON file is needed, create it with private permissions and remove only that temporary input after use. Never remove user-supplied source files.
 3. Reopen the PDF and verify that it is readable, its text matches the intended content, links are valid where supported, and the icon is embedded when accessible. Render pages and inspect for clipping, overlap, missing glyphs, and awkward page breaks when rendering is available. Fix defects before delivery. If visual verification is unavailable, say so instead of claiming the layout was checked.
 4. Return the host's actual downloadable file link or verified saved-file path with a short description. Do not invent a download URL or promise permanent availability. Let the user save the file using the host's controls; do not claim it was saved to their device unless a tool confirms that location.
 5. If PDF creation is unavailable or fails, explain the specific limit and provide the complete brief as readable, print-friendly text. Offer saving or printing to PDF through an available document viewer as a manual fallback; do not present the text as an attached PDF. If the user only asked for text, provide text directly.
 
 In voice, briefly announce the file or fallback and leave the study content in the conversation where supported. Do not read the whole document aloud unless requested or promise to mute voice automatically.
+
+## Generator input
+
+Provide a UTF-8 JSON object containing `evidence_note` and `sections`; `role`, `company`, `stage`, and `sources` are optional. Omit unavailable optional values rather than passing null or empty strings. Notes are plain text, not Markdown or HTML. All content comes from the evidence rules above; the script only lays it out.
+
+```json
+{
+  "role": "Operations coordinator",
+  "company": "Fictional Harbor Works",
+  "stage": "Hiring manager practice",
+  "evidence_note": "Based on two practice answers. Overall performance is not yet assessable.",
+  "sections": [
+    {
+      "heading": "Stories to rehearse",
+      "paragraphs": ["Use the scheduling example you described."],
+      "bullets": ["Explain your own decision and confirm the outcome; do not invent a metric."]
+    },
+    {
+      "heading": "Next practice step",
+      "bullets": ["Retry the prioritization answer without coaching; name the constraint and tradeoff."]
+    }
+  ]
+}
+```
+
+Use 1-12 sections, each with a nonblank `heading` and at least one item in `paragraphs` or `bullets`. Each list accepts up to 30 nonblank strings. Role, company, stage, and headings accept up to 200 characters; other text accepts up to 4000. Input is limited to 1 MiB. Optional `sources` accepts up to 20 objects with `title` and an absolute HTTPS `url` without credentials. Sources become clickable references and are never fetched by the generator.
+
+The generator embeds ReportLab's bundled Vera fonts. If they cannot render the user's language, it fails clearly instead of substituting missing-glyph boxes. When compatible local TrueType fonts are available, pass both `--font` and `--bold-font` paths; otherwise explain the font limitation and provide the original-language text brief. Do not silently translate or remove unsupported characters.
+
+Example command from the plugin root (use resolved absolute paths when installed):
+
+```bash
+/path/to/venv/bin/python skills/mock-interview/scripts/generate_prep_brief.py \
+  --input /path/to/private/brief.json \
+  --output /path/to/output/interview-prep-brief.pdf
+```

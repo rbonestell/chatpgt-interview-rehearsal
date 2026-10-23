@@ -1,6 +1,6 @@
 # Interview Rehearsal Terms of Use
 
-Interview Rehearsal is a skills-only interview practice plugin. These terms describe use of the plugin; the terms applicable to your ChatGPT or Codex account also govern your use of that host.
+Interview Rehearsal is a desktop-only interview practice plugin with a local PDF prep-brief generator. These terms describe use of the plugin; the terms applicable to your ChatGPT or Codex account also govern your use of that host.
 
 ## Interview practice
 

@@ -40,6 +40,10 @@ Use fictional candidate data only. Keep host test results private rather than pu
 | Prep brief with limited evidence | Marks untested competencies and incomplete story details; invents no performance, achievements, or improvement |
 | PDF creation unavailable or failed | Explains the limit and provides the complete readable brief; never invents an attachment or download link |
 | Prep brief privacy and continuity | Omits raw resumes, full transcripts, and unnecessary identifiers; uses no third-party converter; treats a later uploaded brief as a snapshot |
+| Local PDF runtime | Executes the packaged generator from its installed path with the selected Python environment; does not require a particular working directory or install packages silently |
+| Local PDF invalid input or output conflict | Reports the error without echoing private notes, overwriting an existing file, or claiming success; offers correction or readable text |
+| Local PDF unsupported language font | Uses compatible supplied TrueType fonts or reports the limitation and preserves original-language text; no silent missing-glyph boxes or translation |
+| Desktop-only package | Both manifests declare local execution; ZIP contains the generator, dependency file, icon, and instructions, without an MCP server or maintainer tests |
 | Files and metadata | Valid JSON/YAML, synchronized manifests, contained references, preserved identity and audience |
 
 Use existing user testing where it covers the relevant scenarios. After behavior changes, run targeted checks of the affected paths; repeat broader text, voice, or role coverage when changes or unresolved issues warrant it. Report any untested surfaces explicitly when describing validation.

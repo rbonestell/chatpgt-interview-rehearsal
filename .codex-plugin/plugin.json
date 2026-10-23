@@ -15,13 +15,13 @@
     "supportURL": "https://github.com/rbonestell/chatpgt-interview-rehearsal/issues",
     "logo": "./images/icon.png",
     "composerIcon": "./images/icon.png",
-    "longDescription": "Prepare in text, rehearse in voice where supported, and leave with a practical improvement plan. Provide a resume or LinkedIn profile and a job description using native attachments, links, or pasted text. Interview Rehearsal verifies available sources, analyzes role fit, offers a recommended setup, and conducts one-question-at-a-time interviews calibrated to role, seniority, and stage. Includes adaptive follow-ups, evidence-based feedback, targeted retries, and transfer questions to test improvement. Works across professions and experience levels. Users enable host voice mode themselves; text remains fully supported. Uses available host browsing and file tools with readable-text fallbacks; no separate server or guaranteed hiring predictions. After the debrief, request a PDF interview prep brief with story cues, targeted drills, and questions to ask. PDF creation depends on host tools; a readable-text brief is available as a fallback.",
+    "longDescription": "Prepare in text, rehearse in voice where supported, and leave with a practical improvement plan. Provide a resume or LinkedIn profile and a job description using native attachments, links, or pasted text. Interview Rehearsal verifies available sources, analyzes role fit, offers a recommended setup, and conducts one-question-at-a-time interviews calibrated to role, seniority, and stage. Includes adaptive follow-ups, evidence-based feedback, targeted retries, and transfer questions to test improvement. Works across professions and experience levels. Users enable host voice mode themselves; text remains fully supported. Uses available host browsing and file tools with readable-text fallbacks; no separate server or guaranteed hiring predictions. After the debrief, request a PDF interview prep brief with story cues, targeted drills, and questions to ask. The desktop-only plugin bundles a local Python PDF generator with branded formatting. PDF export requires local execution, Python, and ReportLab; a readable-text brief is available as a fallback.",
     "shortDescription": "Voice-first interview practice",
     "websiteURL": "https://github.com/rbonestell/chatpgt-interview-rehearsal",
     "termsOfServiceURL": "https://github.com/rbonestell/chatpgt-interview-rehearsal/blob/main/TERMS.md"
   },
   "name": "interview-rehearsal",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "description": "Run tailored mock interviews from a resume or LinkedIn profile and a job description, with adaptive follow-ups and evidence-based coaching.",
   "author": {
     "email": "rbonestell@gmail.com",
@@ -50,8 +50,9 @@
       },
       "publication": {
         "countries": [],
-        "release_notes": "Packages the five-phase mock interview workflow with adaptive follow-ups, evidence-based debriefs, and targeted practice loops. Adds publication metadata and reviewer prompts; retains readable-text fallbacks and host voice limitations. Adds an optional PDF interview prep brief with the packaged icon, evidence-based study cues, and a readable-text fallback."
+        "release_notes": "Adds a bundled local PDF prep-brief generator with the Interview Rehearsal icon, selectable text, source links, and page numbers. Declares desktop execution and retains evidence-based coaching and readable-text fallbacks. No MCP server or remote PDF service is used."
       }
     }
-  }
+  },
+  "requires_local_executor": true
 }

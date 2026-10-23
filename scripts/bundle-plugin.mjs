@@ -10,7 +10,8 @@ import { isDeepStrictEqual } from 'node:util';
 const root = fileURLToPath(new URL('../', import.meta.url));
 const outputDirectory = path.join(root, 'temp');
 const output = path.join(outputDirectory, 'interview-rehearsal.zip');
-// Explicit release inputs keep scripts, Git data, and local artifacts out.
+// Explicit release inputs keep maintainer scripts, Git data, and local artifacts out.
+// Runtime scripts under skills/ are part of the installed plugin.
 const inputs = [
   'plugin.json', '.codex-plugin/plugin.json', 'skills', 'images',
   'README.md', 'LICENSE', 'PRIVACY.md', 'TERMS.md',
@@ -37,7 +38,8 @@ async function copyInput(relative, destination, inventory) {
   if (stat.isDirectory()) {
     for (const name of (await readdir(source)).sort()) {
       // Finder metadata, hidden local files, and dependency trees are not assets.
-      if (name.startsWith('.') || name === 'node_modules' || name === '__MACOSX') continue;
+      if (name.startsWith('.') || ['node_modules', '__MACOSX', '__pycache__'].includes(name)
+        || name.endsWith('.pyc')) continue;
       await copyInput(`${relative}/${name}`, destination, inventory);
     }
   } else {
@@ -74,6 +76,9 @@ async function bundle() {
     && isDeepStrictEqual(portable.extensions?.['com.openai']?.publication,
       compatibility.extensions?.['com.openai']?.publication),
   'Manifest review and publication metadata must be synchronized.');
+  requireCondition(portable.extensions?.['com.openai']?.requires_local_executor === true
+    && compatibility.requires_local_executor === true,
+  'Desktop execution must be declared in both manifests.');
 
   await mkdir(outputDirectory, { recursive: true });
   const staging = await mkdtemp(path.join(outputDirectory, '.bundle-'));
@@ -82,6 +87,10 @@ async function bundle() {
     const inventory = [];
     for (const input of inputs) await copyInput(input, packageDirectory, inventory);
     requireCondition(inventory.includes('skills/mock-interview/SKILL.md'), 'Missing mock-interview skill.');
+    for (const file of ['generate_prep_brief.py', 'requirements.txt']) {
+      requireCondition(inventory.includes(`skills/mock-interview/scripts/${file}`),
+        `Missing local PDF runtime: ${file}`);
+    }
     const listing = portable.extensions['com.openai'].interface;
     for (const key of ['logo', 'composerIcon', 'logoDark', 'composerIconDark']) {
       if (listing[key] === undefined) continue;

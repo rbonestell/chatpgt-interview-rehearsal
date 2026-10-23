@@ -6,7 +6,7 @@
   Free voice-first, role-specific mock interview practice plugin for ChatGPT.
 </p>
 
-**Best experienced in the ChatGPT desktop app.** Prepare in text, switch to voice in the same conversation for a natural interview rehearsal, then return to your written feedback and practice plan.
+**Made for the ChatGPT desktop app.** Prepare in text, switch to voice in the same conversation for a natural interview rehearsal, then save a locally generated PDF prep brief to study.
 
 ## Installing in ChatGPT
 
@@ -44,10 +44,30 @@ Interview Rehearsal is planned for publication in ChatGPT's plugin directory. In
 
 - No separate API key, external service account, or server setup is needed to use the plugin.
 - Voice support and web/file access come from the ChatGPT host and might vary by plan or client.
-- PDF prep briefs use the host's available file-creation tools. If PDF creation is unavailable, the plugin provides a readable brief you can copy into a document and save or print as a PDF.
+- This desktop-only package includes a local Python PDF generator and requires a conversation with local execution enabled. It contains no MCP server.
+- PDF export requires Python 3.10+ and ReportLab; see setup below. If local execution or the PDF runtime is unavailable, the plugin provides a readable brief you can copy into a document and save or print as a PDF.
 - The plugin cannot automatically turn on voice mode or evaluate tone/body language from text transcripts.
 - Your resume and job description are supplied to your own ChatGPT conversation. Avoid uploading anything confidential that you are not authorized to share.
 - This plugin simulates interviews; it has no affiliation with any employer and does not predict hiring decisions.
+
+## Local PDF setup
+
+The packaged generator creates a PDF with a small Interview Rehearsal icon, blue section headings, selectable text, source links, and page numbers. It processes only the structured study notes supplied to it and makes no network requests. It never overwrites an existing file.
+
+Use an existing Python environment with ReportLab, or create a virtual environment in a writable folder outside the installed plugin. From the plugin source root, run:
+
+```bash
+python3 -m venv /path/to/writable/pdf-runtime
+/path/to/writable/pdf-runtime/bin/python -m pip install -r skills/mock-interview/scripts/requirements.txt
+```
+
+On Windows, the environment's Python executable is `pdf-runtime\Scripts\python.exe`. Installing the dependency downloads packages; generating PDFs afterward runs locally. The plugin does not install dependencies automatically. Tell the assistant which Python executable to use if needed.
+
+After your mock interview, ask for a PDF prep brief. The assistant builds the study notes from your actual answers and runs the bundled generator. Choose a local destination if you want one; otherwise use the host's writable artifact location. Creating the PDF does not automatically save it to Downloads or provide cross-chat memory. Keep or delete saved PDFs and any source notes using your normal file controls.
+
+For manual use and the JSON input format, see [prep brief guidance](skills/mock-interview/references/prep-brief.md). The generator uses embedded Vera fonts; other languages may require compatible local TrueType fonts through `--font` and `--bold-font`.
+
+Desktop-only metadata does not guarantee directory acceptance. Submission eligibility and review remain subject to OpenAI's current requirements.
 
 ## Privacy, terms, and support
 
