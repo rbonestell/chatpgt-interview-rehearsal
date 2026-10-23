@@ -1,0 +1,20 @@
+{
+  "name": "interview-rehearsal",
+  "interface": {
+    "displayName": "Interview Rehearsal"
+  },
+  "plugins": [
+    {
+      "name": "interview-rehearsal",
+      "source": {
+        "source": "local",
+        "path": "./"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Education & Research"
+    }
+  ]
+}
