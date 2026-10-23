@@ -1,7 +1,4 @@
 temp/
 tmp/
-node_modules/
-dist/
 docs/
 .env
-.wrangler/

@@ -36,32 +36,10 @@ jobs:
         working-directory: release-source
         run: |
           version="${RELEASE_TAG#v}"
-          for file in plugin.json .codex-plugin/plugin.json package.json; do
+          for file in plugin.json .codex-plugin/plugin.json; do
             jq --arg version "$version" '.version = $version' "$file" > "$file.tmp"
             mv "$file.tmp" "$file"
           done
-          npm install --package-lock-only --ignore-scripts
-
-      - name: Install and validate the workspace
-        working-directory: release-source
-        run: |
-          npm ci
-          npm run check
-          npm run test:worker
-
-      - name: Deploy the Cloudflare Worker
-        working-directory: release-source
-        env:
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-        run: npx wrangler deploy
-
-      - name: Verify and configure the deployed MCP endpoint
-        working-directory: release-source
-        env:
-          MCP_ENDPOINT: ${{ vars.MCP_ENDPOINT || 'https://chatgpt-interview-rehearsal-mcp.rbonestell.com/mcp' }}
-        run: |
-          node scripts/configure-mcp.mjs "$MCP_ENDPOINT"
 
       - name: Bundle the plugin
         working-directory: release-source
@@ -86,16 +64,15 @@ jobs:
         working-directory: main-source
         run: |
           version="${RELEASE_TAG#v}"
-          for file in plugin.json .codex-plugin/plugin.json package.json; do
+          for file in plugin.json .codex-plugin/plugin.json; do
             jq --arg version "$version" '.version = $version' "$file" > "$file.tmp"
             mv "$file.tmp" "$file"
           done
-          npm install --package-lock-only --ignore-scripts
 
       - name: Commit and push version changes
         working-directory: main-source
         run: |
-          git add plugin.json .codex-plugin/plugin.json package.json package-lock.json
+          git add plugin.json .codex-plugin/plugin.json
           if git diff --cached --quiet; then
             echo "JSON versions already match the release tag."
             exit 0
