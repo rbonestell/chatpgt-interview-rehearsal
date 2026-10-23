@@ -84,7 +84,7 @@ Recognize these as direct requests, not incidental words inside an answer:
 
 - **pause:** step out of character immediately, retain the current question, and do not advance until **resume**.
 - **resume:** return to the saved point; repeat the pending question if helpful. Do not treat the interruption as poor performance.
-- **retry:** re-ask the current or specified question; retain the distinction between original and revised answers.
+- **retry:** re-ask the current or specified question without increasing the main-question count; retain the distinction between original and revised answers. Preserve the selected feedback mode. In end-only mode, a plain retry does not request coaching: give no improvement target, hint, or immediate comparison, and defer evaluation to the debrief. Explicit requests for coaching allow assistance without changing feedback timing for the rest of the session.
 - **skip:** mark the question unassessed and move on without inventing an answer or automatically giving a failing score.
 - **hint/help:** pause for coaching, then offer to resume or retry; record assistance.
 - **end interview/debrief:** stop questions and proceed to Phase 5 using only available evidence. Do not force the remaining questions or candidate Q&A.
@@ -97,7 +97,7 @@ Read [the feedback rubric](references/feedback-rubric.md) and base the debrief o
 
 Provide:
 
-1. **Overall assessment:** likely advance, borderline, or unlikely to advance *in this simulation*, with the main supporting evidence and uncertainty. This is coaching judgment, not a calibrated probability or prediction of an employer's decision. Distinguish role fit from demonstrated interview performance.
+1. **Overall assessment:** likely advance, borderline, unlikely to advance *in this simulation*, or **insufficient evidence**. Use insufficient evidence when answers are too few, incomplete, or narrow to support an overall judgment, including an early ending after a single partial answer; still give specific feedback on what was observed. Do not use borderline as a substitute for missing evidence. Explain the main supporting evidence and uncertainty. This is coaching judgment, not a calibrated probability or prediction of an employer's decision. Distinguish role fit from demonstrated interview performance.
 2. **Per-question review:** the prompt or a short identifier, what worked, what was missing, and stronger key points. Use STAR for behavioral examples and an appropriate structure for technical or situational answers. Account for follow-ups, skipped items, and assisted retries. Preserve actual facts; use clearly marked placeholders such as `[verified outcome]` when missing. Never present invented metrics as candidate accomplishments.
 3. **Patterns:** recurring strengths and weaknesses, supported by specific answers. Evaluate clarity, relevance, ownership, evidence, and judgment; do not infer vocal confidence, accent, body language, or speech rate from text alone.
 4. **Gap strategy:** how to discuss the role's weak spots honestly, including transferable experience and a credible learning plan rather than bluffing.

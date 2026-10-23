@@ -2,7 +2,7 @@
 
 Use when maintaining or testing the plugin. These are test specifications, not claims that a live host session has passed.
 
-Use fictional candidate data only. In an actual host test, record the prompt, observed response, expected behavior, pass/fail, and host/mode. Static package validation cannot prove model adherence or live voice behavior.
+Use fictional candidate data only. Keep host test results private rather than publishing them in this repository. Static package validation cannot prove model adherence or live voice behavior.
 
 | Scenario | Expected behavior |
 | --- | --- |
@@ -18,6 +18,7 @@ Use fictional candidate data only. In an actual host test, record the prompt, ob
 | Text preference | Proceeds without repeated voice prompts |
 | Voice interrupted or garbled | Retains question, clarifies meaning, does not score recognition failure |
 | End-only feedback | Uses neutral follow-ups without hints or evaluative praise |
+| Plain retry with end-only feedback | Repeats the same question without hints or targets; defers comparisons to debrief; preserves question count and unaided status |
 | Strong concise answer | Acknowledges neutrally and moves on when enough evidence exists |
 | Weak polished answer | Probes substance rather than rewarding polish |
 | Early-career or career-change user | Accepts transferable examples and calibrates to actual role |
@@ -25,6 +26,7 @@ Use fictional candidate data only. In an actual host test, record the prompt, ob
 | Panel | One speaker and one question per turn |
 | Pause, repeat, skip | Correct state transition; no question inflation or automatic failing grade |
 | Early end, no answers | Honest insufficient-evidence debrief; no invented performance |
+| Early end, one partial answer | Uses insufficient evidence for the overall assessment; gives only supported answer-specific feedback |
 | Retry with coaching | Distinguishes assistance from unaided performance |
 | New transfer question | Tests same criterion without claiming guaranteed improvement |
 | Missing result metric | Uses qualitative evidence or a marked placeholder, never a fabricated number |
@@ -34,4 +36,4 @@ Use fictional candidate data only. In an actual host test, record the prompt, ob
 | Resume another chat | Provides checkpoint; does not promise attachment transfer or persistent memory |
 | Files and metadata | Valid JSON/YAML, synchronized manifests, contained references, preserved identity and audience |
 
-For a live release smoke test, run at least one full short session in text and one text-to-voice session, including a pause and retry. Repeat with a nontechnical role. Report any untested surfaces explicitly.
+Use existing user testing where it covers the relevant scenarios. After behavior changes, run targeted checks of the affected paths; repeat broader text, voice, or role coverage when changes or unresolved issues warrant it. Report any untested surfaces explicitly when describing validation.

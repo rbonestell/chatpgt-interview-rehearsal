@@ -1,4 +1,4 @@
-# Repository Guidelines
+# Agent Instructions
 
 ## Project Structure & Module Organization
 
@@ -26,17 +26,15 @@ For behavioral validation, load the plugin into a supported host and follow the 
 
 Use concise Markdown headings, direct instructions, and relative links to reference files. Preserve the YAML front matter in `SKILL.md`. Use lowercase, hyphen-separated reference filenames, such as `practice-loops.md`.
 
-Format JSON with two-space indentation and double-quoted keys and strings. No formatter or linter is configured. Keep shared manifest metadata synchronized; update the README version heading when releasing.
+Format JSON with two-space indentation and double-quoted keys and strings. No formatter or linter is configured. Keep shared manifest metadata synchronized. The release version lives in both manifests; the README intentionally has no version heading.
 
 ## Testing Guidelines
 
-Use `skills/mock-interview/references/review-scenarios.md` as the acceptance specification. No automated coverage threshold exists. Test with fictional candidate data and record prompts, observed behavior, expected behavior, pass/fail, and host/mode.
-
-Before release, run a complete short text session and a text-to-voice session, including pause and retry; repeat with a nontechnical role. Explicitly report untested surfaces. JSON validation does not establish live interview or voice behavior.
+Use `skills/mock-interview/references/review-scenarios.md` as the acceptance specification. No automated coverage threshold exists. Use fictional candidate data for targeted checks of changed behavior. Existing user testing may satisfy relevant scenarios; repeat checks when changes or unresolved issues warrant it. Keep test results private rather than publishing them in this repository. Explicitly report untested surfaces when describing validation. JSON validation does not establish live interview or voice behavior.
 
 ## Commit & Pull Request Guidelines
 
-The repository has no commits yet, so no commit-message convention is established. Use short, imperative subjects, such as `Clarify interview pause behavior`.
+Use short, imperative commit subjects, such as `Clarify interview pause behavior`.
 
 Keep changes focused. PR descriptions should explain the changed behavior, identify affected files, link relevant issues, and report validation and untested host features. Include screenshots for artwork or visible interface changes.
 

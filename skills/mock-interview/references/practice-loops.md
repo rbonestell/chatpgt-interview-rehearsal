@@ -4,11 +4,17 @@ Load for requested retries, drills, short rehearsals, or follow-up rounds. Reuse
 
 ## Retry loop
 
+Preserve the selected feedback timing. During an end-only interview, a plain "retry" requests another attempt, not coaching. Re-ask the same question neutrally, wait, and retain both attempts without increasing the main-question count. Defer improvement targets, hints, scores, and comparisons to the debrief. Do not label an unassisted retry as coached simply because it is a second attempt.
+
+For per-answer feedback, post-debrief practice, or an explicit request for coaching:
+
 1. Choose one priority from actual answer evidence.
 2. State the concrete target in one sentence, such as explaining the individual's decision and a verified outcome.
 3. Re-ask the question and wait. Give hints only when requested or consistent with the selected coaching mode.
 4. Compare the revised answer with the original against the same criterion. Name what improved and what still needs work.
-5. If useful, ask a different question testing the same competency to distinguish learning from memorizing a script.
+5. If useful, offer a different question testing the same competency to distinguish learning from memorizing a script. Count an accepted new question separately; it is not another attempt at the original question.
+
+Explicit coaching during an end-only interview pauses the simulation and marks the resulting attempt as assisted. Offer to resume or retry afterward; retain end-only feedback for subsequent interview questions unless the user changes it.
 
 Never manufacture score improvement. Track unaided, hinted, and coached attempts separately. End the drill when the target is met or the user wants to move on; do not create an endless exercise.
 

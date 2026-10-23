@@ -19,6 +19,8 @@
         ],
         "developerName": "Bobby Bonestell",
         "displayName": "Interview Rehearsal",
+        "privacyPolicyURL": "https://github.com/rbonestell/chatpgt-interview-rehearsal/blob/main/PRIVACY.md",
+        "supportURL": "https://github.com/rbonestell/chatpgt-interview-rehearsal/issues",
         "logo": "./images/icon.png",
         "composerIcon": "./images/icon.png",
         "longDescription": "Prepare in text, rehearse in voice where supported, and leave with a practical improvement plan. Provide a resume or LinkedIn profile and a job description using native attachments, links, or pasted text. Interview Rehearsal verifies available sources, analyzes role fit, offers a recommended setup, and conducts one-question-at-a-time interviews calibrated to role, seniority, and stage. Includes adaptive follow-ups, evidence-based feedback, targeted retries, and transfer questions to test improvement. Works across professions and experience levels. Users enable host voice mode themselves; text remains fully supported. Uses available host browsing and file tools with readable-text fallbacks; no separate server or guaranteed hiring predictions.",
